@@ -1,0 +1,1143 @@
+/*Fonts*/
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@font-face {
+  font-family: "Comissaire";
+  src: url("./fonts/BrushScriptOpti-Regular.otf") format("OpenType");
+}
+
+/*Désactiver le scroll horizontale et scroll transparant*/
+html {
+  overflow-x: hidden;
+  overflow-y: overlay;
+}
+
+/*Marges remisent à 0*/
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+  text-decoration: none;
+  list-style: none;
+  scroll-behavior: smooth;
+}
+
+/*Initilisation*/
+:root {
+  --PrimaryBlue: rgb(99, 218, 255);
+  --SecondaryBlue: rgb(0, 195, 255);
+}
+
+/*Police d'écriture dans le body*/
+body {
+  font-family: "Poppins", Arial, Helvetica, sans-serif;
+  max-width: 100vw;
+}
+
+/*NAV----------------------------------------------------------------------------------------------------------------------------------NAV*/
+
+/*Centrer nav-links et logo*/
+.navbar {
+  position: absolute;
+  padding: 20px 50px;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+}
+
+/*Couleur du texte navbar*/
+.navbar a {
+  color: white;
+}
+
+/*Taille logo dans la navbar*/
+.navbar .logo {
+  font-size: 1.7em;
+  font-weight: bold;
+}
+
+/*Flex le menu UL de la navbar*/
+.navbar .nav-links ul {
+  display: flex;
+}
+
+/*Taille nav-links*/
+.navbar .nav-links ul li {
+  margin: 0 25px;
+  font-size: 1.1em;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+/*Background hover navlinks*/
+.navbar .nav-links ul li a {
+  padding: 8px 16px;
+  border-radius: 20px;
+  transition: 0.5s;
+}
+
+/*Activation du background hover et aussi pour la classe active*/
+.navbar .nav-links ul li.active a,
+.navbar .nav-links ul li a:hover {
+  background-color: rgba(255, 255, 255);
+  color: var(--SecondaryBlue);
+}
+
+/*Position menu-hamburger*/
+.navbar .menu-hamburger {
+  width: 35px;
+  display: none;
+  position: absolute;
+  right: 30px;
+  top: 50px;
+}
+
+/*Position onglet avant le scroll*/
+.onglet {
+  position: fixed;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 20px;
+  z-index: 100;
+  opacity: 0;
+  transform: translateX(-250%);
+  transition: 0.5s;
+}
+
+/*Position onglet après le scroll*/
+.onglet.scroll {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/*Style onglet*/
+.onglet a {
+  height: 15px;
+  width: 15px;
+  background-color: transparent;
+  margin: 7px 0px;
+  border: solid 2px white;
+  border-radius: 99px;
+  transition: 0.3s;
+}
+
+/*Style onglet active*/
+.onglet a.activeScroll {
+  background-color: white;
+  border: none;
+  transition: 0.3s;
+  scale: 1.45;
+}
+
+/*Taille scrollbar*/
+::-webkit-scrollbar {
+  width: 10px;
+  background-color: transparent;
+}
+
+/*Couleur scrollbar devant*/
+::-webkit-scrollbar-thumb {
+  border-radius: 15px;
+  background: rgb(0, 162, 255);
+}
+
+/*Couleur scrollbar hover*/
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(0, 140, 196);
+}
+
+/*Positionnement boutton (scroll to top) avant de scroll*/
+#scroll_to_top {
+  position: fixed;
+  left: 2%;
+  bottom: 2%;
+  transform: translateX(-300%);
+  transition: 0.3s;
+  background-color: white;
+  height: 50px;
+  width: 50px;
+  border-radius: 99px;
+  box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.219);
+}
+
+/*Adaptation NAVBAR pour tablette/telephone*/
+@media screen and (max-width: 1220px) {
+  body {
+    max-width: 100vw;
+    overflow: overlay;
+    overflow-x: hidden;
+  }
+  .navbar {
+    padding: 0;
+  }
+  .navbar .menu-hamburger {
+    display: block;
+    z-index: 4;
+  }
+  .nav-links {
+    top: 0;
+    left: 0;
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.206);
+    -webkit-backdrop-filter: blur(10px);
+
+    backdrop-filter: blur(10px);
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: -100%;
+    opacity: 0;
+    z-index: 3;
+    transition: all 0.5s ease;
+  }
+
+  .nav-links.mobile-menu {
+    margin-left: 0;
+    opacity: 1;
+  }
+
+  .nav-links ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .navbar .nav-links ul li {
+    margin: 25px 0px;
+    font-size: 1.3em;
+  }
+
+  .navbar .logo {
+    position: absolute;
+    top: 40px;
+    left: 30px;
+  }
+
+  /*Ne pas afficher le menu onglet sur téléphone*/
+  .onglet {
+    display: none;
+  }
+
+  /*Positionnement bouton scroll to top sur téléphone après le scroll*/
+  #scroll_to_top.scroll {
+    transform: translateX(2%);
+    z-index: 50;
+  }
+
+  /*Taille img du boutton (scroll to top)*/
+  #scroll_to_top img {
+    padding: 10px;
+    width: 100%;
+    color: var(--SecondaryBlue);
+  }
+}
+
+/*COOKIES----------------------------------------------------------------------------------------------------------------------------------COOKIES*/
+
+/*Taille box cookie*/
+#cookie {
+  position: fixed;
+  left: 2%;
+  bottom: 2%;
+  width: 350px;
+  height: 200px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.38);
+  z-index: 500;
+}
+
+/*Centrer les éléments dans le popup*/
+#cookie .content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 80%;
+  padding: 30px;
+}
+
+/*Icon cookie*/
+#cookie .content span {
+  scale: 2;
+  color: var(--SecondaryBlue);
+}
+
+/*Taille texte cookie*/
+#cookie .content p {
+  font-size: 0.7em;
+  text-align: justify;
+  margin-top: 20px;
+}
+
+/*Centrer bouton cookie*/
+#cookie .content2 {
+  display: flex;
+  justify-content: space-evenly;
+  text-align: center;
+  margin-top: -5px;
+}
+
+/*Style bouton coukie*/
+#cookie .content2 button {
+  height: 30px;
+  width: 100px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.5s ease;
+}
+
+/*Bouton accepter*/
+#cookie .content2 button.accept_btn {
+  background-color: var(--SecondaryBlue);
+  color: white;
+}
+
+/*Bouton refuser*/
+#cookie .content2 button.no_accept_btn {
+  background-color: rgba(128, 128, 128, 0.162);
+  color: black;
+}
+
+/*Bouton accepter hover*/
+#cookie .content2 button.accept_btn:hover {
+  background-color: rgb(0, 229, 255);
+}
+
+/*Bouton refuser hover*/
+#cookie .content2 button.no_accept_btn:hover {
+  background-color: rgba(128, 128, 128, 0.473);
+}
+
+/*Transition du popup sur la gauche lors de l'acceptation*/
+#cookie.hide {
+  transform: translateX(-150%);
+  transition: 0.5s;
+}
+/*Popup cacher qaund les cookies sont acceptés*/
+#cookie.hideF {
+  opacity: 0;
+}
+
+/*PAGE1----------------------------------------------------------------------------------------------------------------------------------PAGE1*/
+
+/*Background*/
+#accueil {
+  min-height: 100vh;
+  min-width: 100vw;
+  background-image: url(images/background.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+/*Centrer element*/
+#accueil .container {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/*Titre*/
+#accueil .container h1 {
+  text-align: center;
+  color: white;
+  font-size: 5em;
+  position: relative;
+  top: -20%;
+}
+/*Centrer texte*/
+#accueil .container p {
+  text-align: center;
+  color: white;
+  font-size: 2em;
+  position: relative;
+  top: -20%;
+  font-weight: 300;
+}
+
+/*Boutton*/
+#accueil .container button {
+  cursor: pointer;
+  width: 250px;
+  height: 65px;
+  border-radius: 99px;
+  border: none;
+  background-color: transparent;
+  color: white;
+  font-weight: 600;
+  font-size: 1.1em;
+  border: solid 4px white;
+  position: relative;
+  z-index: 2;
+  overflow: hidden;
+  transition: 0.5s;
+}
+
+/*Hover boutton*/
+#accueil .container button:hover {
+  width: 280px;
+  color: var(--SecondaryBlue);
+}
+
+/*Position du boutton avant le hover*/
+#accueil .container button::before {
+  content: "";
+  position: absolute;
+  width: 280px;
+  height: 65px;
+  border-radius: 99px;
+  top: -5px;
+  left: -5px;
+  transform: translate(-100%);
+  transition: 0.5s;
+  z-index: -1;
+  background-color: white;
+}
+
+/*Position du boutton pendant le hover*/
+#accueil .container button:hover::before {
+  transform: translate(0%);
+}
+
+/*Fleche boutton avant hover*/
+#accueil .container button span {
+  transform: scale(0);
+  margin-left: -10px;
+  transition: 0.3s;
+  position: absolute;
+  top: 16px;
+}
+
+/*Fleche boutton apres hover*/
+#accueil .container button:hover span {
+  transform: scale(1.2);
+  margin-left: 20px;
+}
+
+/*Adaptation pour téléphone*/
+@media screen and (max-width: 900px) {
+  body {
+    max-width: 100vw;
+    overflow: overlay;
+    overflow-x: hidden;
+  }
+  #accueil .container h1 {
+    position: static;
+    margin-bottom: 20px;
+    line-height: 70px;
+    font-size: 3em;
+  }
+
+  #accueil .container p {
+    position: static;
+    margin-bottom: 20px;
+    font-size: 1.5em;
+  }
+}
+
+/*PAGE2----------------------------------------------------------------------------------------------------------------------------------PAGE2*/
+
+/*Background*/
+#biographie {
+  min-height: 100vh;
+  background-color: var(--PrimaryBlue);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 50px 0;
+}
+
+/*Container de la biographie*/
+#biographie .box {
+  width: 75%;
+  background-color: white;
+
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.295);
+}
+
+/*Centrer le container*/
+#biographie .box .container {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  padding: 40px 0px;
+}
+
+#biographie .box .container .picture {
+  width: 530px;
+  background: url(./images/Antoni_Gaudi.jpg);
+  margin-top: -80px;
+  height: 700px;
+  background-repeat: no-repeat;
+  box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.425);
+  transition: 0.5s;
+}
+
+#biographie .box .container .content {
+  width: 50%;
+}
+
+#biographie .box .container .content h1 {
+  font-size: 4.8em;
+  color: rgb(99, 218, 255);
+  letter-spacing: 6px;
+}
+
+#biographie .box .container .content p {
+  font-style: italic;
+  text-align: justify;
+  line-height: 30px;
+  width: 85%;
+  margin-top: 20px;
+}
+
+#biographie .box .container .content button {
+  margin-top: 30px;
+  width: 170px;
+  height: 55px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1em;
+  background-color: rgb(0, 132, 255);
+  transition: 0.5s;
+  color: white;
+}
+
+#biographie .box .container .content button:hover {
+  background-color: rgb(99, 218, 255);
+  width: 190px;
+}
+
+/*Adaptation page 3 téléphone*/
+@media screen and (max-width: 1700px) {
+  #biographie .box .container .content h1 {
+    font-size: 4.2em;
+  }
+}
+
+@media screen and (max-width: 1520px) {
+  #biographie .box .container .content h1 {
+    font-size: 3.8em;
+  }
+}
+
+@media screen and (max-width: 1420px) {
+  #biographie .box .container .content {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #biographie .box .container .content h1 {
+    font-size: 3.8em;
+    text-align: center;
+  }
+
+  #biographie .box .container .picture {
+    scale: 0.9;
+    margin-top: -100px;
+  }
+
+  #biographie .box {
+    width: 80%;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  #biographie .box .container .content h1 {
+    margin-top: -50px;
+    font-size: 3em;
+  }
+
+  #biographie .box .container .picture {
+    scale: 0.7;
+    margin-top: -180px;
+  }
+}
+
+@media screen and (max-width: 780px) {
+  #biographie .box .container .content h1 {
+    margin-top: -150px;
+    font-size: 2em;
+  }
+
+  #biographie .box .container .picture {
+    min-width: 530px;
+    scale: 0.5;
+    margin-top: -250px;
+  }
+  #biographie .box {
+    width: 80%;
+  }
+}
+
+/*PAGE3----------------------------------------------------------------------------------------------------------------------------------PAGE3*/
+
+/*Background*/
+#critique {
+  background-color: white;
+}
+
+#critique .wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 50px 10px;
+}
+
+#critique .container .content h1 {
+  color: var(--PrimaryBlue);
+  text-align: center;
+  font-size: 2.2em;
+}
+
+#critique .container {
+  display: flex;
+  justify-content: center;
+  padding: 30px;
+  width: 80%;
+  box-shadow: 2px 2px 40px rgb(0 0 0 / 30%);
+  flex-wrap: wrap;
+}
+
+#critique .container .content {
+  display: flex;
+  flex-direction: column;
+  margin-left: 50px;
+  width: 60%;
+}
+
+#critique img {
+  width: 450px;
+  margin: auto 0;
+  box-shadow: 2px 2px 10px rgb(0 0 0 / 30%);
+  transition: 0.5s;
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+#critique img:hover {
+  scale: 1.05;
+  cursor: pointer;
+}
+
+#critique .container .content h3 {
+  font-size: 0.9em;
+  margin-bottom: 10px;
+  border-bottom: 1px solid black;
+}
+
+#critique .container .content p {
+  text-align: justify;
+  width: 100%;
+  margin-bottom: 20px;
+  font-size: 0.8em;
+  font-style: italic;
+  line-height: 25px;
+}
+
+#critique .container .content h5.top {
+  margin-top: 20px;
+}
+
+#critique .container .content h5 {
+  text-align: center;
+  font-weight: 400;
+}
+
+#critique .critiqueP h1 {
+  margin-top: 30px;
+  color: var(--PrimaryBlue);
+  font-size: 2em;
+  text-align: center;
+}
+
+#critique .critiqueP p {
+  text-align: justify;
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 10px;
+}
+
+@media screen and (max-width: 1530px) {
+  #critique .container .content {
+    padding-top: 30px;
+    width: 90%;
+    margin: auto;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  #critique img {
+    width: 250px;
+  }
+}
+
+/*PAGE4----------------------------------------------------------------------------------------------------------------------------------PAGE4*/
+
+/*Background*/
+#exposition {
+  background-color: var(--PrimaryBlue);
+  width: 100vw;
+  padding-bottom: 30px;
+}
+
+/*Centrer le titre*/
+#exposition h1 {
+  flex-wrap: wrap;
+  font-size: 3em;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  padding-top: 50px;
+  text-align: center;
+}
+
+/*Centre les 3 premières images*/
+#exposition .center .groupe_image {
+  display: flex;
+  justify-content: space-around;
+  padding-top: 50px;
+  flex-wrap: wrap;
+  width: 80%;
+  margin: 0 auto;
+}
+
+/*Taille des 3 premières images*/
+#exposition .center .groupe_image .photo {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  height: 250px;
+  width: 250px;
+}
+
+/*Taille des 3 premières bordures des images*/
+#exposition .center .groupe_image .photo .bordur {
+  background-color: transparent;
+  height: 250px;
+  width: 250px;
+  border: solid 4px white;
+  margin-left: 20px;
+  margin-top: 20px;
+}
+
+#exposition .center .groupe_image .photo p {
+  margin-top: 10px;
+  opacity: 0;
+  transition: all 0.7s;
+  transform: translateY(150%);
+  text-align: center;
+  color: white;
+}
+
+#exposition .center .groupe_image .photo:hover p {
+  opacity: 1;
+  transform: translateY(0%);
+}
+
+/*Centre les 2 images ronde*/
+#exposition .center .groupe_image2 {
+  display: flex;
+  justify-content: space-evenly;
+  padding-top: 130px;
+  flex-wrap: wrap;
+}
+
+/*Taille des 2 images rondes*/
+#exposition .center .groupe_image2 .photo {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  height: 250px;
+  width: 250px;
+  text-align: center;
+  color: white;
+}
+
+/*Taille des 2 bordures des images rondes*/
+#exposition .center .groupe_image2 .bordur {
+  background-color: transparent;
+  height: 250px;
+  width: 250px;
+  border: solid 4px white;
+  margin-left: -20px;
+  margin-top: -20px;
+}
+
+#exposition .center .groupe_image2 .photo p {
+  margin-top: 30px;
+  opacity: 0;
+  transition: all 0.7s;
+  transform: translateY(150%);
+}
+
+#exposition .center .groupe_image2 .photo:hover p {
+  opacity: 1;
+  transform: translateY(0%);
+}
+
+/*Centre la grande image*/
+#exposition .center .groupe_image3 {
+  display: flex;
+  justify-content: space-evenly;
+  padding-top: 150px;
+}
+
+/*Centre les 3 images rectangles*/
+#exposition .center .groupe_image4 {
+  display: flex;
+  justify-content: space-evenly;
+  padding-top: 100px;
+  flex-wrap: wrap;
+}
+
+/*Taille des 3 images rectangles*/
+#exposition .center .groupe_image4 .photo {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  height: 600px;
+  width: 400px;
+  text-align: center;
+  color: white;
+}
+
+/*Taille des 3 bordures des images rectangle*/
+#exposition .center .groupe_image4 .bordur {
+  background-color: transparent;
+  height: 600px;
+  width: 400px;
+  border: solid 4px white;
+  margin-left: -20px;
+  margin-top: 20px;
+}
+
+#exposition .center .groupe_image4 .photo p {
+  margin-top: 10px;
+  opacity: 0;
+  transition: all 0.7s;
+  transform: translateY(150%);
+}
+
+#exposition .center .groupe_image4 .photo:hover p {
+  opacity: 1;
+  transform: translateY(0%);
+}
+
+#exposition .center2 {
+  display: flex;
+  justify-content: center;
+  margin-top: 80px;
+}
+
+#exposition .center2 button {
+  background-color: white;
+  border: none;
+  width: 220px;
+  height: 50px;
+  cursor: pointer;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 1em;
+  color: var(--SecondaryBlue);
+  transition: 0.5s;
+}
+
+#exposition .center2 button:hover {
+  width: 250px;
+}
+
+/*Adaptation page 3 téléphone*/
+@media screen and (max-width: 900px) {
+  #exposition .center .groupe_image .photo {
+    margin-bottom: 100px;
+  }
+
+  #exposition .center .groupe_image2 .photo {
+    margin-top: 100px;
+  }
+
+  /*Centre les 3 images rectangles*/
+  #exposition .center .groupe_image4 {
+    margin-top: -150px;
+  }
+
+  /*Taille des 3 images rectangles*/
+  #exposition .center .groupe_image4 .photo {
+    height: 350px;
+    width: 250px;
+    margin-top: 100px;
+  }
+
+  /*Taille des 3 bordures des images rectangle*/
+  #exposition .center .groupe_image4 .bordur {
+    height: 350px;
+    width: 250px;
+  }
+}
+
+/*PAGE5----------------------------------------------------------------------------------------------------------------------------------PAGE5*/
+
+/*Background*/
+#plan {
+  background-color: white;
+  width: 100vw;
+}
+#plan .wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 50px 10px;
+}
+
+#plan .container {
+  display: flex;
+  justify-content: center;
+  padding: 30px;
+  width: 90%;
+  box-shadow: 2px 2px 40px rgb(0 0 0 / 30%);
+  flex-direction: column;
+  align-items: center;
+}
+
+#plan .container h1 {
+  color: var(--PrimaryBlue);
+  text-align: center;
+  font-size: 2.2em;
+}
+#plan .container img {
+  margin-top: 30px;
+  width: 80%;
+  box-shadow: 2px 2px 40px rgb(0 0 0 / 30%);
+}
+
+#plan .content1 {
+  display: flex;
+  justify-content: space-around;
+  width: 70%;
+  flex-wrap: wrap;
+  margin-top: 50px;
+}
+
+#plan .content1 h1 {
+  color: black;
+  font-size: 1.2em;
+  text-align: center;
+  margin-top: 20px;
+}
+
+#plan .content1 p {
+  color: black;
+  text-align: center;
+}
+
+#plan .content2 {
+  display: flex;
+  justify-content: space-around;
+  width: 50%;
+  margin-top: 50px;
+  flex-wrap: wrap;
+  border-top: solid 3px black;
+}
+
+#plan .content2 h1 {
+  color: black;
+  font-size: 1.2em;
+  text-align: center;
+  margin-top: 20px;
+}
+
+#plan .content2 p {
+  color: black;
+  text-align: center;
+}
+
+#plan .container button {
+  margin-top: 50px;
+  width: 250px;
+  height: 55px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1em;
+  background-color: var(--PrimaryBlue);
+  transition: 0.5s;
+  color: white;
+}
+
+#plan .container button:hover {
+  width: 270px;
+
+  background-color: var(--SecondaryBlue);
+}
+
+/*PAGE6----------------------------------------------------------------------------------------------------------------------------------PAGE6*/
+
+/*Background*/
+#note {
+  background-color: var(--PrimaryBlue);
+  min-height: 100vh;
+  padding: 70px 0px;
+}
+
+/*Centre le container*/
+#note .container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: white;
+  width: 70%;
+  margin: 0 auto;
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 2px 2px 40px rgb(0 0 0 / 30%);
+}
+
+/*Style du titre*/
+#note .container h1 {
+  font-size: 2.5em;
+  text-align: center;
+  font-family: "Comissaire", Arial, Helvetica, sans-serif;
+  border-bottom: solid 2px white;
+  text-transform: uppercase;
+}
+
+/*Style du paragraphe*/
+#note .container p {
+  text-align: justify;
+  margin-top: 30px;
+  font-family: "Comissaire", Arial, Helvetica, sans-serif;
+  font-size: 1.35em;
+}
+
+/*Footer----------------------------------------------------------------------------------------------------------------------------------Footer*/
+
+footer {
+  text-align: center;
+  padding: 20px;
+}
+
+footer .container {
+  margin-top: 20px;
+}
+
+footer .container span {
+  padding: 0 10px;
+  scale: 0.9;
+  transition: 0.5s;
+  color: black;
+}
+
+footer .container span:hover {
+  color: var(--PrimaryBlue);
+  scale: 1.2;
+  cursor: pointer;
+}
+
+footer a {
+  text-decoration: none;
+  color: black;
+}
+footer p {
+  text-decoration: underline;
+  font-size: 0.9em;
+}
+
+footer .container p#footer {
+  margin-top: 10px;
+  font-size: 0.7em;
+  text-decoration: none;
+}
+
+/*REVEAL (apparait au scroll)----------------------------------------------------------------------------------------------------------------------------------REVEAl*/
+
+.reveal {
+  position: relative;
+  transform: translateY(150px);
+  opacity: 0;
+  transition: all 1.5s ease;
+}
+
+.reveal.active {
+  transform: translateY(0px);
+  opacity: 1;
+}
+
+.reveal2 {
+  position: relative;
+  opacity: 0;
+  transition: all 4s ease;
+}
+
+.reveal2.active {
+  opacity: 1;
+}
+
+.reveal3 {
+  position: relative;
+  transform: translateX(150px);
+  opacity: 0;
+  transition: all 1.5s ease;
+}
+
+.reveal3.active {
+  transform: translateX(0px);
+  opacity: 1;
+}
+
+.reveal4 {
+  position: relative;
+  transform: translateX(-150px);
+  opacity: 0;
+  transition: all 1.5s ease;
+}
+
+.reveal4.active {
+  transform: translateX(0px);
+  opacity: 1;
+}
+
+.reveal5 {
+  position: relative;
+  transform: translateY(-150px);
+  opacity: 0;
+  transition: all 1.5s ease;
+}
+
+.reveal5.active {
+  transform: translateY(0px);
+  opacity: 1;
+}
+
+.reveal6 {
+  position: relative;
+  opacity: 0;
+  transition: all 2s ease;
+}
+
+.reveal6.active {
+  opacity: 1;
+}
